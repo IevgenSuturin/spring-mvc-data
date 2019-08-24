@@ -37,13 +37,15 @@ public class StatisticManipulationServiceImpl implements IStatisticManipulationS
     }
 
     private List<String> parseFileForLines(String fileName) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File(fileName));
         List<String> lines = new ArrayList<>();
 
-        while (scanner.hasNextLine() ){
-            String line = scanner.nextLine();
-            if(!line.isEmpty()) {
-                lines.add(line);
+        try(Scanner scanner = new Scanner(new File(fileName))) {
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.isEmpty()) {
+                    lines.add(line);
+                }
             }
         }
         return lines;
